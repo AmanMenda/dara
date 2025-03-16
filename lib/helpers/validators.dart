@@ -8,6 +8,8 @@ import 'dart:core';
 class Validators {
   Validators._(); // private constructor to avoid external instantiation
 
+  static final RegExp nameRegExp = RegExp(r'^[a-zA-Z]+$');
+
   /// Regular expression for validating email addresses.
   static final RegExp emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
@@ -59,5 +61,9 @@ class Validators {
       }
       return null; // Valid name
     };
+  }
+
+  static String? Function(String?) nameValidator({required String emptyErrorMsg, required String invalidFormatMsg}) {
+    return regExpMatchValidator(regExp: nameRegExp, emptyErrorMsg: emptyErrorMsg, invalidFormatMsg: invalidFormatMsg);
   }
 }

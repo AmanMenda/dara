@@ -14,6 +14,9 @@ class RoutePaths {
   /// The route path for the login screen.
   static const String login = '/login';
 
+  /// The route path for the register screen.
+  static const String register = '/register';
+
   /// The route path for the product detail screen.
   static const String productDetail = '/details';
 }

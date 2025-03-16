@@ -1,11 +1,13 @@
+import 'package:dara/constants/routes.dart';
 import 'package:dara/helpers/extensions/media_query.dart';
 import 'package:dara/helpers/validators.dart';
 import 'package:dara/theme/colors.dart';
 import 'package:dara/viewmodels/login_viewmodel.dart';
-import 'package:dara/views/widgets/input_field.dart';
+import 'package:dara/views/shared/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:dara/views/base.view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:dara/theme/sizes.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({ super.key });
@@ -28,13 +30,18 @@ class _LoginViewState extends State<LoginView> {
           backgroundColor: Colors.white,
           body: Stack(
             children: [
-              Opacity(
-                opacity: 0.15,
+              Positioned(
+                left: 0,
+                top: context.screenHeight * 0.5, // Commence à 50% de la hauteur
+                bottom: 0,
+                width: context.screenWidth,
                 child: Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/nutrition_background.jpg'),
+                      opacity: 0.7,
+                      image: AssetImage('assets/images/1.jpg'),
                       fit: BoxFit.cover,
+                      alignment: Alignment.centerLeft,
                     ),
                   ),
                 ),
@@ -47,8 +54,8 @@ class _LoginViewState extends State<LoginView> {
       child: Padding(
         padding: const EdgeInsets.only(
           top: 20,
-          right: 16,
-          left: 16
+          right: Spacing.medium,
+          left: Spacing.medium
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,9 +70,18 @@ class _LoginViewState extends State<LoginView> {
             ),
             SizedBox(height: context.screenHeight * 0.05),
             Center(
-              child: Text(
-                "Pas encore de compte ? Clique ici pour t'inscrire",
-                style: GoogleFonts.cabin(color: Colors.grey, decoration: TextDecoration.underline, fontSize: 12),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RoutePaths.register);
+                },
+                child: Text(
+                  "Pas encore de compte ? Clique ici pour t'inscrire",
+                  style: GoogleFonts.cabin(
+                    color: Colors.grey,
+                    decoration: TextDecoration.underline,
+                    fontSize: 12
+                  )
+                ),
               ),
             ),
             const SizedBox(height: 16),

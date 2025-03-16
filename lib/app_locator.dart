@@ -1,4 +1,9 @@
+import 'package:dara/services/product_service.dart';
+import 'package:dara/viewmodels/history_viewmodel.dart';
 import 'package:dara/viewmodels/login_viewmodel.dart';
+import 'package:dara/viewmodels/product_details_viewmodel.dart';
+import 'package:dara/viewmodels/register_viewmodel.dart';
+import 'package:dara/views/product_details/product_details_view.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
@@ -11,6 +16,7 @@ GetIt locator = GetIt.instance;
 /// 
 /// This function registers singleton instances of services that are used across the app.
 void registerServices() {
+  locator.registerSingleton<ProductService>(ProductService());
 }
 
 /// Registers view model classes with the service locator.
@@ -19,6 +25,9 @@ void registerServices() {
 /// View models are created on-demand and are not shared across the app.
 void registerViewModels() {
   locator.registerFactory<LoginViewModel>(() => LoginViewModel());
+  locator.registerFactory<RegisterViewModel>(() => RegisterViewModel());
+  locator.registerFactory<HistoryViewModel>(() => HistoryViewModel());
+  locator.registerFactory<ProductDetailsViewModel>(() => ProductDetailsViewModel());
 }
 
 /// Registers provider classes with the service locator.
@@ -45,7 +54,7 @@ Future<void> setupLocator() async {
     ),
   );
 
-  // registerServices();
+  registerServices();
   registerViewModels();
   // registerProviders();
   await locator.allReady();
